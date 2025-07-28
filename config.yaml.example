@@ -1,0 +1,18 @@
+# Pylon KB to Ada Sync Configuration
+# Copy this file to config.yaml and update with your values
+
+pylon:
+  api_key: "your_pylon_api_key_here"
+  base_url: "https://api.usepylon.com"
+
+ada:
+  api_key: "your_ada_api_key_here"
+  base_url: "https://your-ada-instance.ada.support"
+
+sync:
+  article_limit: 50
+  source_ids_file: "source_ids.txt"
+
+logging:
+  file: "sync.log"
+  level: "INFO"
