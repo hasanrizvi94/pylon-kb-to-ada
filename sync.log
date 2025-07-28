@@ -6,3 +6,11 @@
 2025-07-28 14:54:55,761 [INFO] Uploaded 6 articles to Ada.
 2025-07-28 14:54:55,762 [INFO] Sync completed successfully.
 2025-07-28 14:54:55,762 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-07-28 15:11:19,026 [INFO] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-07-28 15:11:19,338 [INFO] Retrieved 6 articles.
+2025-07-28 15:11:19,338 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-07-28 15:11:19,965 [INFO] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-07-28 15:11:19,975 [INFO] Uploading 6 articles to Ada.
+2025-07-28 15:11:20,556 [INFO] Uploaded 6 articles to Ada.
+2025-07-28 15:11:20,557 [INFO] Sync completed successfully.
+2025-07-28 15:11:20,557 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca
