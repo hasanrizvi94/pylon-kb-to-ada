@@ -1,10 +1,14 @@
 import requests
 import sys
 
+# Ada API authentication key
 ADA_API_KEY = "471951f1295c907712d2dd06dc79a3a3"
 
 def delete_ada_source(source_id):
+    # Construct the API endpoint URL for deleting a specific knowledge source
     url = f"https://hasan-test-gr.ada.support/api/v2/knowledge/sources/{source_id}"
+    
+    # Send DELETE request to Ada API
     res = requests.delete(
         url,
         headers={
@@ -12,17 +16,22 @@ def delete_ada_source(source_id):
             "Content-Type": "application/json"
         }
     )
+    
+    # Check if deletion was successful (204 = No Content, indicating successful deletion)
     if res.status_code == 204:
         print(f"Deleted Ada knowledge source: {source_id}")
     else:
+        # Log error details if deletion failed
         print(f"Failed to delete knowledge source {source_id}.")
         print(f"Status Code: {res.status_code}")
         print(f"Response: {res.text}")
 
 if __name__ == "__main__":
+    # Validate command line arguments
     if len(sys.argv) != 2:
         print("Usage: python delete.py <SOURCE_ID>")
         sys.exit(1)
 
+    # Extract source ID from command line argument
     source_id = sys.argv[1]
     delete_ada_source(source_id)
