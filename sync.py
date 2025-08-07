@@ -49,9 +49,9 @@ def get_pylon_kb():
 
 def get_articles(kb_id):
     # Make authenticated GET request to fetch articles from specific knowledge base
-    # Limit set to 50 to avoid overwhelming the API and processing too many at once
+    # Limit set to 200 to fetch more articles while avoiding overwhelming the API
     res = requests.get(
-        f"https://api.usepylon.com/knowledge-bases/{kb_id}/articles?limit=50",
+        f"https://api.usepylon.com/knowledge-bases/{kb_id}/articles?limit=200",
         headers={
             "Authorization": f"Bearer {PYLON_API_KEY}",  # Bearer token authentication
             "Content-Type": "application/json"           # Specify JSON content type

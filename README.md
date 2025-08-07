@@ -46,7 +46,7 @@ python sync.py
 
 This will:
 1. Fetch the first knowledge base from Pylon
-2. Retrieve all articles (up to 50)
+2. Retrieve all articles (up to 200)
 3. Create a corresponding knowledge source in Ada
 4. Upload all articles with converted Markdown content
 
@@ -73,5 +73,5 @@ All operations are logged to `sync.log` with timestamps and detailed information
 ## Notes
 
 - Currently configured for test environment (`hasan-test-gr.ada.support`)
-- Processes up to 50 articles per sync (Pylon API limit)
+- Processes up to 200 articles per sync (Pylon API limit)
 - Maintains article IDs and timestamps for synchronization tracking
