@@ -2,11 +2,11 @@ import requests
 import sys
 
 # Ada API authentication key
-ADA_API_KEY = "471951f1295c907712d2dd06dc79a3a3"
+ADA_API_KEY = "YOUR_ADA_API_KEY"
 
 def delete_ada_source(source_id):
     # Construct the API endpoint URL for deleting a specific knowledge source
-    url = f"https://hasan-test-gr.ada.support/api/v2/knowledge/sources/{source_id}"
+    url = f"https://hasan-gen-test.ada.support/api/v2/knowledge/sources/{source_id}"
     
     # Send DELETE request to Ada API
     res = requests.delete(

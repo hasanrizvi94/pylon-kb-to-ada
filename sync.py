@@ -15,7 +15,7 @@ logging.basicConfig(
 # API credentials for accessing Pylon and Ada services
 # NOTE: In production, these should be stored as environment variables for security
 PYLON_API_KEY = "YOUR_PYLON_API_KEY"
-ADA_API_KEY = "471951f1295c907712d2dd06dc79a3a3"
+ADA_API_KEY = "***REMOVED***"
 
 def log_and_print(msg):
     print(msg)        # Display message to user in real-time
@@ -81,7 +81,7 @@ def create_ada_source(kb_id, kb_name):
 
     # Make authenticated POST request to create the knowledge source
     res = requests.post(
-        "https://hasan-test-gr.ada.support/api/v2/knowledge/sources",
+        "https://hasan-gen-test.ada.support/api/v2/knowledge/sources",
         headers={
             "Authorization": f"Bearer {ADA_API_KEY}",  # Bearer token authentication
             "Content-Type": "application/json"         # Specify JSON payload
@@ -139,7 +139,7 @@ def upsert_articles(articles, source_id):
     # Use Ada's bulk upload API to efficiently upload all articles at once
     # This is much faster than individual article uploads
     res = requests.post(
-        "https://hasan-test-gr.ada.support/api/v2/knowledge/bulk/articles/",
+        "https://hasan-gen-test.ada.support/api/v2/knowledge/bulk/articles/",
         headers={
             "Authorization": f"Bearer {ADA_API_KEY}",  # Bearer token authentication
             "Content-Type": "application/json"         # Specify JSON payload
