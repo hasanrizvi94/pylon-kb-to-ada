@@ -60,7 +60,7 @@ Replace `<SOURCE_ID>` with the ID of the Ada knowledge source to delete.
 ## API Endpoints
 
 - **Pylon**: `https://api.usepylon.com/knowledge-bases`
-- **Ada**: `https://hasan-test-gr.ada.support/api/v2/knowledge/`
+- **Ada**: `https://{bot-url}.ada.support/api/v2/knowledge/`
 
 ## Logging
 
@@ -72,6 +72,6 @@ All operations are logged to `sync.log` with timestamps and detailed information
 
 ## Notes
 
-- Currently configured for test environment (`hasan-test-gr.ada.support`)
+- Replace `{bot-url}` with your Ada bot's subdomain in the API endpoints
 - Processes up to 200 articles per sync (Pylon API limit)
 - Maintains article IDs and timestamps for synchronization tracking
