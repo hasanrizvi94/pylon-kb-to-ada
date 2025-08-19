@@ -59,8 +59,13 @@ Replace `<SOURCE_ID>` with the ID of the Ada knowledge source to delete.
 
 ## API Endpoints
 
-- **Pylon**: `https://api.usepylon.com/knowledge-bases`
-- **Ada**: `https://{bot-url}.ada.support/api/v2/knowledge/`
+- **Pylon**: 
+  - Knowledge bases: `https://api.usepylon.com/knowledge-bases`
+  - Articles: `https://api.usepylon.com/knowledge-bases/{kb_id}/articles`
+- **Ada**: 
+  - Create knowledge source: `https://{bot-url}.ada.support/api/v2/knowledge/sources`
+  - Bulk upload articles: `https://{bot-url}.ada.support/api/v2/knowledge/bulk/articles/`
+  - Delete knowledge source: `https://{bot-url}.ada.support/api/v2/knowledge/sources/{source_id}`
 
 ## Logging
 
