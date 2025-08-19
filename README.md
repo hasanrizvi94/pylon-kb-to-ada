@@ -62,10 +62,17 @@ Replace `<SOURCE_ID>` with the ID of the Ada knowledge source to delete.
 - **Pylon**: 
   - Knowledge bases: `https://api.usepylon.com/knowledge-bases`
   - Articles: `https://api.usepylon.com/knowledge-bases/{kb_id}/articles`
+  - Single article: `https://api.usepylon.com/knowledge-bases/{kb_id}/articles/{id}`
 - **Ada**: 
   - Create knowledge source: `https://{bot-url}.ada.support/api/v2/knowledge/sources`
   - Bulk upload articles: `https://{bot-url}.ada.support/api/v2/knowledge/bulk/articles/`
   - Delete knowledge source: `https://{bot-url}.ada.support/api/v2/knowledge/sources/{source_id}`
+
+## Rate Limits
+
+- **Pylon**:
+  - GET `/articles`: 60 req/min
+  - GET `/articles/{id}`: 20 req/min
 
 ## Logging
 
