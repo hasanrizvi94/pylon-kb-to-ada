@@ -58,3 +58,19 @@
 2025-08-08 16:48:03,817 [INFO] Retrieved 6 articles.
 2025-08-08 16:48:03,819 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
 2025-08-08 16:48:04,884 [ERROR] Sync failed: 409 Client Error: Conflict for url: https://hasan-gen-test.ada.support/api/v2/knowledge/sources
+2025-08-08 17:06:03,336 [INFO] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-08-08 17:06:03,693 [INFO] Retrieved 6 articles.
+2025-08-08 17:06:03,695 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-08-08 17:06:04,352 [INFO] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-08-08 17:06:04,366 [INFO] Uploading 6 articles to Ada.
+2025-08-08 17:06:04,944 [INFO] Uploaded 6 articles to Ada.
+2025-08-08 17:06:04,948 [INFO] Sync completed successfully.
+2025-08-08 17:06:04,948 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-08-08 17:20:33,254 [INFO] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-08-08 17:20:33,594 [INFO] Retrieved 6 articles.
+2025-08-08 17:20:33,595 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-08-08 17:20:34,314 [INFO] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-08-08 17:20:34,318 [INFO] Uploading 6 articles to Ada.
+2025-08-08 17:20:35,381 [INFO] Uploaded 6 articles to Ada.
+2025-08-08 17:20:35,385 [INFO] Sync completed successfully.
+2025-08-08 17:20:35,385 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca
