@@ -74,3 +74,19 @@
 2025-08-08 17:20:35,381 [INFO] Uploaded 6 articles to Ada.
 2025-08-08 17:20:35,385 [INFO] Sync completed successfully.
 2025-08-08 17:20:35,385 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-15 23:08:05,289 [INFO] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-09-15 23:08:05,661 [INFO] Retrieved 7 articles.
+2025-09-15 23:08:05,666 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-09-15 23:08:06,301 [INFO] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-15 23:08:06,316 [INFO] Uploading 7 articles to Ada.
+2025-09-15 23:08:06,853 [ERROR] Sync failed: 400 Client Error: Bad Request for url: https://hasan-gen-test.ada.support/api/v2/knowledge/bulk/articles/
+2025-09-15 23:11:58,913 [INFO] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-09-15 23:11:59,402 [INFO] Retrieved 7 articles.
+2025-09-15 23:11:59,406 [INFO] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-09-15 23:12:00,326 [INFO] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-15 23:12:00,332 [INFO] Skipping article 'How to Setup Single Sign-On (SSO)' - empty content
+2025-09-15 23:12:00,332 [INFO] Skipping article 'Why am I not receiving the password reset email?' - empty content
+2025-09-15 23:12:00,340 [INFO] Uploading 5 articles to Ada.
+2025-09-15 23:12:01,199 [INFO] Uploaded 5 articles to Ada.
+2025-09-15 23:12:01,203 [INFO] Sync completed successfully.
+2025-09-15 23:12:01,203 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
