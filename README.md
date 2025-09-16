@@ -1,6 +1,6 @@
 # Pylon KB to Ada Knowledge Base Sync
 
-A Python tool to synchronize knowledge base articles from Pylon to Ada Support's knowledge management system.
+A Python tool to synchronize knowledge base articles from Pylon to Ada Support's knowledge management system. Works with any Ada bot instance and Pylon account through interactive credential prompts.
 
 ## Overview
 
@@ -8,8 +8,11 @@ This tool provides a proof-of-concept implementation for migrating knowledge bas
 
 ## Features
 
+- **Universal Compatibility**: Works with any Ada bot and Pylon account through interactive prompts
+- **Secure Credential Handling**: Prompts for API keys and bot handles at runtime (no hardcoded credentials)
 - **Sync Articles**: Fetches all articles from a Pylon knowledge base and uploads them to Ada
 - **Content Conversion**: Automatically converts HTML content to Markdown format
+- **Smart Filtering**: Skips articles with empty content to ensure Ada API compliance
 - **Logging**: Comprehensive logging to `sync.log` for troubleshooting
 - **Source Tracking**: Maintains a record of created knowledge sources in `source_ids.txt`
 - **Cleanup Utility**: Includes a deletion script to remove synchronized sources
@@ -33,9 +36,10 @@ This tool provides a proof-of-concept implementation for migrating knowledge bas
    pip install requests markdownify
    ```
 
-2. Configure API keys in the scripts:
-   - Update `PYLON_API_KEY` in `sync.py`
-   - Update `ADA_API_KEY` in both `sync.py` and `delete.py`
+2. **No configuration needed!** The scripts will prompt you for:
+   - Your Ada bot handle (e.g., "my-bot" for my-bot.ada.support)
+   - Your Pylon API key
+   - Your Ada API key
 
 ## Usage
 
@@ -44,18 +48,31 @@ This tool provides a proof-of-concept implementation for migrating knowledge bas
 python sync.py
 ```
 
-This will:
+The script will prompt you for:
+1. **Ada bot handle**: Enter your bot subdomain (e.g., "my-company" for my-company.ada.support)
+2. **Pylon API key**: Your Pylon API authentication key
+3. **Ada API key**: Your Ada API authentication key
+
+Then it will:
 1. Fetch the first knowledge base from Pylon
 2. Retrieve all articles (up to 200)
 3. Create a corresponding knowledge source in Ada
-4. Upload all articles with converted Markdown content
+4. Upload all articles with converted Markdown content (skips articles with empty content)
 
 ### Delete Knowledge Source
+
+**Option 1 - Interactive (Recommended):**
 ```bash
 python delete.py <SOURCE_ID>
 ```
+You'll be prompted for your Ada bot handle and API key.
 
-Replace `<SOURCE_ID>` with the ID of the Ada knowledge source to delete.
+**Option 2 - Direct:**
+```bash
+python delete.py <SOURCE_ID> <ADA_BOT_URL> <ADA_API_KEY>
+```
+
+Replace the placeholders with your actual values. The sync script provides the exact delete command at completion.
 
 ## API Endpoints
 
@@ -82,8 +99,16 @@ All operations are logged to `sync.log` with timestamps and detailed information
 - Success/failure status
 - Error details
 
+## Security
+
+- **No hardcoded credentials**: All API keys and bot URLs are entered at runtime
+- **Git history cleaned**: No sensitive information stored in repository history
+- **Safe for public repositories**: Anyone can use this tool with their own credentials
+
 ## Notes
 
-- Replace `{bot-url}` with your Ada bot's subdomain in the API endpoints
+- **Universal compatibility**: Works with any Ada bot subdomain and Pylon account
+- **Automatic URL construction**: Bot handle automatically constructs the full Ada API URL
+- **Smart content filtering**: Skips articles with empty content to prevent API errors
 - Processes up to 200 articles per sync (Pylon API limit)
 - Maintains article IDs and timestamps for synchronization tracking
