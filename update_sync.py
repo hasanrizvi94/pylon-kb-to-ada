@@ -4,6 +4,7 @@ import logging
 from datetime import datetime
 import hashlib
 import time
+from dateutil import parser
 
 # Configure logging
 logging.basicConfig(
@@ -49,10 +50,9 @@ def get_pylon_articles(kb_id, pylon_api_key, bot_handle=None, source_id=None):
             article_id = article.get("id") or article.get("_id")
             article_title = article.get("title") or article.get("name") or "Untitled"
 
-            # Log all available timestamp fields for debugging
+            # Log timestamp fields only if none found (for debugging missing timestamps)
             timestamp_fields = {k: v for k, v in article.items() if any(word in k.lower() for word in ['time', 'date', 'updated', 'modified', 'created', 'published'])}
-            if timestamp_fields:
-                log_and_print(f"Article '{article_title}' timestamp fields: {timestamp_fields}", bot_handle, source_id)
+            # Removed verbose logging - only log if no timestamp fields found
 
             # Try various timestamp field names that might exist
             updated_at = (
@@ -188,25 +188,32 @@ def perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url
     # Articles in both but timestamps differ → UPDATE
     to_update = []
     for article_id in pylon_ids & ada_ids:
-        pylon_timestamp = pylon_articles[article_id]["updated_at"]
-        ada_timestamp = ada_articles[article_id]["updated_at"]
+        pylon_timestamp_str = pylon_articles[article_id]["updated_at"]
+        ada_timestamp_str = ada_articles[article_id]["updated_at"]
 
-        # Compare timestamps - update if Pylon is newer
-        if pylon_timestamp > ada_timestamp:
-            to_update.append(article_id)
-            log_and_print(f"Article updated: '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
-            log_and_print(f"  Pylon timestamp: {pylon_timestamp}", bot_handle, source_id)
-            log_and_print(f"  Ada timestamp: {ada_timestamp}", bot_handle, source_id)
-        elif pylon_timestamp == ada_timestamp:
-            log_and_print(f"Article unchanged: '{pylon_articles[article_id]['title']}' - timestamps match", bot_handle, source_id)
-        else:
-            # Fallback to content hash comparison if timestamps are unreliable
+        try:
+            # Parse timestamps to datetime objects for proper comparison
+            pylon_timestamp = parser.parse(pylon_timestamp_str)
+            ada_timestamp = parser.parse(ada_timestamp_str)
+
+            # Compare timestamps - update if Pylon is newer
+            if pylon_timestamp > ada_timestamp:
+                to_update.append(article_id)
+                log_and_print(f"Article updated: '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
+                log_and_print(f"  Pylon timestamp: {pylon_timestamp_str}", bot_handle, source_id)
+                log_and_print(f"  Ada timestamp: {ada_timestamp_str}", bot_handle, source_id)
+            elif pylon_timestamp == ada_timestamp:
+                log_and_print(f"Article unchanged: '{pylon_articles[article_id]['title']}' - timestamps match", bot_handle, source_id)
+            else:
+                log_and_print(f"Article unchanged: '{pylon_articles[article_id]['title']}' - Ada timestamp is newer", bot_handle, source_id)
+        except Exception as e:
+            # Fallback to content hash comparison if timestamp parsing fails
+            log_and_print(f"Timestamp parsing failed for '{pylon_articles[article_id]['title']}': {e}", bot_handle, source_id)
             pylon_hash = pylon_articles[article_id]["content_hash"]
             ada_hash = ada_articles[article_id]["content_hash"]
             if pylon_hash != ada_hash:
                 to_update.append(article_id)
                 log_and_print(f"Article updated (fallback hash check): '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
-                log_and_print(f"  Ada timestamp newer but content differs - using hash comparison", bot_handle, source_id)
 
     log_and_print(f"Articles to update: {len(to_update)}", bot_handle, source_id)
 
