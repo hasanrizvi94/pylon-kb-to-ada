@@ -41,11 +41,19 @@ def get_user_credentials():
 
     return pylon_api_key, ada_api_key, ada_bot_url
 
-def log_and_print(msg):
-    print(msg)        # Display message to user in real-time
-    logging.info(msg) # Write message to log file for permanent record
+def log_and_print(msg, bot_handle=None, source_id=None):
+    # Add bot handle and source ID context to message
+    if bot_handle and source_id:
+        formatted_msg = f"[{bot_handle}:{source_id}] {msg}"
+    elif bot_handle:
+        formatted_msg = f"[{bot_handle}] {msg}"
+    else:
+        formatted_msg = msg
 
-def get_pylon_kb(pylon_api_key):
+    print(formatted_msg)        # Display message to user in real-time
+    logging.info(formatted_msg) # Write message to log file for permanent record
+
+def get_pylon_kb(pylon_api_key, bot_handle=None):
     # Make authenticated GET request to fetch all knowledge bases
     res = requests.get(
         "https://api.usepylon.com/knowledge-bases",
@@ -54,24 +62,24 @@ def get_pylon_kb(pylon_api_key):
             "Content-Type": "application/json"           # Specify JSON content type
         }
     )
-    
+
     # Raise exception if request failed (4xx or 5xx status codes)
     res.raise_for_status()
-    
+
     # Extract the data array from JSON response
     data = res.json()["data"]
-    
+
     # Get ID and title from the first knowledge base
     # Note: This assumes at least one knowledge base exists
     kb_id = data[0]["id"]
     kb_name = data[0]["title"]
-    
+
     # Log the found knowledge base for tracking
-    log_and_print(f"Found Pylon KB: {kb_name} (ID: {kb_id})")
-    
+    log_and_print(f"Found Pylon KB: {kb_name} (ID: {kb_id})", bot_handle)
+
     return kb_id, kb_name
 
-def get_articles(kb_id, pylon_api_key):
+def get_articles(kb_id, pylon_api_key, bot_handle=None, source_id=None):
     # Make authenticated GET request to fetch articles from specific knowledge base
     # Limit set to 200 to fetch more articles while avoiding overwhelming the API
     res = requests.get(
@@ -81,19 +89,19 @@ def get_articles(kb_id, pylon_api_key):
             "Content-Type": "application/json"           # Specify JSON content type
         }
     )
-    
+
     # Raise exception if request failed
     res.raise_for_status()
-    
+
     # Extract articles array from JSON response
     articles = res.json()["data"]
-    
+
     # Log the number of articles retrieved for tracking
-    log_and_print(f"Retrieved {len(articles)} articles.")
-    
+    log_and_print(f"Retrieved {len(articles)} articles.", bot_handle, source_id)
+
     return articles
 
-def create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url):
+def create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url, bot_handle=None):
     # Prepare the payload for creating Ada knowledge source
     # Using the same ID ensures consistency between Pylon and Ada
     payload = {
@@ -101,7 +109,7 @@ def create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url):
         "name": f"Pylon ({kb_name or 'Untitled'})"  # Descriptive name with fallback
     }
 
-    log_and_print(f"Creating Ada knowledge source with: {payload}")
+    log_and_print(f"Creating Ada knowledge source with: {payload}", bot_handle)
 
     # Make authenticated POST request to create the knowledge source
     res = requests.post(
@@ -112,7 +120,7 @@ def create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url):
         },
         json=payload  # Automatically serializes dict to JSON
     )
-    
+
     # Handle potential API errors with detailed error information
     try:
         res.raise_for_status()  # Raises HTTPError for bad responses
@@ -123,16 +131,16 @@ def create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url):
 
     # Extract the source ID from our payload (since Ada uses the ID we provided)
     source_id = payload["id"]
-    log_and_print(f"Created Ada knowledge source: {source_id}")
+    log_and_print(f"Created Ada knowledge source: {source_id}", bot_handle, source_id)
 
     # Record the created source ID with timestamp for cleanup tracking
     # This file helps identify sources that can be deleted later
     with open("source_ids.txt", "a") as f:
-        f.write(f"{datetime.now().isoformat()} - {source_id}\n")
+        f.write(f"{datetime.now().isoformat()} - {bot_handle}:{source_id}\n")
 
     return source_id
 
-def upsert_articles(articles, source_id, ada_api_key, ada_bot_url):
+def upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_handle=None):
     formatted = []  # List to store Ada-formatted article objects
 
     # Process each Pylon article and convert to Ada format
@@ -143,7 +151,7 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url):
 
         # Skip articles with empty content (Ada requires non-empty content)
         if not content.strip():
-            log_and_print(f"Skipping article '{article.get('title', 'Untitled')}' - empty content")
+            log_and_print(f"Skipping article '{article.get('title', 'Untitled')}' - empty content", bot_handle, source_id)
             continue
 
         # Extract the most recent update timestamp, with fallback options
@@ -165,10 +173,10 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url):
 
     # Check if we have any articles to upload
     if not formatted:
-        log_and_print("No articles with valid content found to upload.")
+        log_and_print("No articles with valid content found to upload.", bot_handle, source_id)
         return
 
-    log_and_print(f"Uploading {len(formatted)} articles to Ada.")
+    log_and_print(f"Uploading {len(formatted)} articles to Ada.", bot_handle, source_id)
 
     # Use Ada's bulk upload API to efficiently upload all articles at once
     # This is much faster than individual article uploads
@@ -189,7 +197,7 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url):
         print("Ada response:", res.text)
         raise
 
-    log_and_print(f"Uploaded {len(formatted)} articles to Ada.")
+    log_and_print(f"Uploaded {len(formatted)} articles to Ada.", bot_handle, source_id)
 
 # Main execution block - only runs when script is executed directly (not imported)
 if __name__ == "__main__":
@@ -197,28 +205,31 @@ if __name__ == "__main__":
         # Step 0: Get user credentials and configuration
         pylon_api_key, ada_api_key, ada_bot_url = get_user_credentials()
 
+        # Extract bot handle from URL
+        bot_handle = ada_bot_url.replace("https://", "").replace(".ada.support", "")
+
         # Step 1: Get the Pylon knowledge base information
         # This identifies which knowledge base to sync from
-        kb_id, kb_name = get_pylon_kb(pylon_api_key)
+        kb_id, kb_name = get_pylon_kb(pylon_api_key, bot_handle)
 
         # Step 2: Retrieve all articles from the Pylon knowledge base
         # This fetches the actual content that needs to be synced
-        articles = get_articles(kb_id, pylon_api_key)
+        articles = get_articles(kb_id, pylon_api_key, bot_handle)
 
         # Step 3: Create a corresponding knowledge source in Ada
         # This creates the container where Pylon articles will be stored
-        ada_source_id = create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url)
+        ada_source_id = create_ada_source(kb_id, kb_name, ada_api_key, ada_bot_url, bot_handle)
 
         # Step 4: Convert and upload all articles to Ada
         # This performs the actual content migration
-        upsert_articles(articles, ada_source_id, ada_api_key, ada_bot_url)
+        upsert_articles(articles, ada_source_id, ada_api_key, ada_bot_url, bot_handle)
 
         # Log successful completion
-        log_and_print("Sync completed successfully.")
+        log_and_print("Sync completed successfully.", bot_handle, ada_source_id)
 
         # Provide cleanup instructions for the user
         # The delete.py script can be used to remove the created source if needed
-        log_and_print(f"To delete this source, run: python delete.py {ada_source_id} {ada_bot_url} {ada_api_key}")
+        log_and_print(f"To delete this source, run: python delete.py {ada_source_id} {ada_bot_url} {ada_api_key}", bot_handle, ada_source_id)
 
     except Exception as e:
         # Handle any errors that occur during the sync process
