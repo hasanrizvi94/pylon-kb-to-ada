@@ -59,12 +59,13 @@ python sync.py
 
 The script will prompt you for:
 1. **Ada bot handle**: Enter your bot subdomain (e.g., "my-company" for my-company.ada.support)
-2. **Pylon API key**: Your Pylon API authentication key
-3. **Ada API key**: Your Ada API authentication key
+2. **Ada API key**: Your Ada API authentication key
+3. **Pylon API key**: Your Pylon API authentication key
+4. **Pylon knowledge base ID**: The ID of the specific knowledge base to sync
 
 Then it will:
-1. Fetch the first knowledge base from Pylon
-2. Retrieve all articles (up to 200)
+1. Validate the knowledge base exists and fetch its details
+2. Retrieve all articles (up to 200) from the specified KB
 3. Create a corresponding knowledge source in Ada
 4. Upload all articles with converted Markdown content
 5. Log the new source ID for future delta syncs
@@ -79,8 +80,8 @@ python update_sync.py
 
 The script will prompt you for:
 1. **Ada bot handle**: Your bot subdomain
-2. **Pylon API key**: Your Pylon API authentication key
-3. **Ada API key**: Your Ada API authentication key
+2. **Ada API key**: Your Ada API authentication key
+3. **Pylon API key**: Your Pylon API authentication key
 4. **Pylon knowledge base ID**: The ID of your Pylon knowledge base
 5. **Ada knowledge source ID**: The ID of your Ada knowledge source (from initial sync)
 
@@ -120,8 +121,16 @@ Replace the placeholders with your actual values. The sync scripts provide the e
 
 ### When to Use Each Script
 
-- **`sync.py`**: Use for initial migration or creating new knowledge sources
+- **`sync.py`**: Use for initial migration or creating new knowledge sources from any Pylon KB
 - **`update_sync.py`**: Use for ongoing maintenance and updates of existing sources
+
+### Multiple Knowledge Bases Support
+
+Both scripts now support multiple knowledge bases within the same Pylon account:
+
+- **Automatic KB selection**: Enter the specific KB ID you want to sync
+- **Multi-KB workflows**: Sync different Pylon KBs to separate Ada knowledge sources
+- **Enterprise ready**: Perfect for organizations with multiple product lines or teams
 
 ### Timestamp-Based Synchronization
 
@@ -207,9 +216,35 @@ Delta sync completed: 0 created, 0 updated, 0 deleted
 ## Notes
 
 - **Universal compatibility**: Works with any Ada bot subdomain and Pylon account
+- **Multiple KB support**: Sync any specific knowledge base by entering its ID
+- **Consistent user experience**: Both scripts follow the same prompt sequence (Ada → Pylon)
 - **Automatic URL construction**: Bot handle automatically constructs the full Ada API URL
 - **Smart content filtering**: Skips articles with empty content to prevent API errors
 - **Efficient sync**: Delta sync only processes changed articles
 - **Timezone aware**: Handles different timestamp formats between Pylon and Ada
+- **Clean codebase**: Removed all redundant/commented code for better maintainability
 - Processes up to 200 articles per sync (Pylon API limit)
 - Maintains article IDs and timestamps for accurate synchronization tracking
+
+## Example Multi-KB Usage
+
+**Scenario**: Company with separate KBs for different products
+
+```bash
+# Sync Product A KB to Ada
+python sync.py
+# Enter: ada-bot, ada-key, pylon-key, product-a-kb-id
+
+# Sync Product B KB to Ada
+python sync.py
+# Enter: ada-bot, ada-key, pylon-key, product-b-kb-id
+
+# Later, update both with delta sync
+python update_sync.py
+# Enter: ada-bot, ada-key, pylon-key, product-a-kb-id, product-a-source-id
+
+python update_sync.py
+# Enter: ada-bot, ada-key, pylon-key, product-b-kb-id, product-b-source-id
+```
+
+This creates separate knowledge sources in Ada for each Pylon KB, allowing independent management and updates.
