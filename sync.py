@@ -156,11 +156,29 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_handle=No
 
         # Extract the most recent update timestamp, with fallback options
         # Different Pylon sources may use different timestamp field names
+        article_title = article.get("title") or article.get("name") or "Untitled"
+
+        # Log all available timestamp fields for debugging
+        timestamp_fields = {k: v for k, v in article.items() if any(word in k.lower() for word in ['time', 'date', 'updated', 'modified', 'created', 'published'])}
+        if timestamp_fields:
+            log_and_print(f"Article '{article_title}' timestamp fields: {timestamp_fields}", bot_handle, source_id)
+
+        # Try various timestamp field names that might exist
         updated_at = (
-            article.get("updated_at")     # Primary timestamp field
-            or article.get("modified_at") # Alternative timestamp field
-            or datetime.utcnow().isoformat() + "Z"  # Fallback to current time in ISO format
+            article.get("updated_at") or
+            article.get("modified_at") or
+            article.get("last_updated") or
+            article.get("last_modified") or
+            article.get("last_published_at") or  # This is the key field from Pylon!
+            article.get("published_at") or
+            article.get("date_updated") or
+            article.get("date_modified")
         )
+
+        # Log articles with missing timestamps to help identify data issues
+        if not updated_at:
+            log_and_print(f"Warning: Article '{article_title}' has no timestamp - using default date", bot_handle, source_id)
+            updated_at = "2020-01-01T00:00:00Z"  # Use a default historical date instead of current time
 
         # Create Ada-compatible article object
         formatted.append({

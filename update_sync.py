@@ -47,16 +47,36 @@ def get_pylon_articles(kb_id, pylon_api_key, bot_handle=None, source_id=None):
         content = md(article.get("current_published_content_html", "") or "")
         if content.strip():  # Only include articles with content
             article_id = article.get("id") or article.get("_id")
+            article_title = article.get("title") or article.get("name") or "Untitled"
+
+            # Log all available timestamp fields for debugging
+            timestamp_fields = {k: v for k, v in article.items() if any(word in k.lower() for word in ['time', 'date', 'updated', 'modified', 'created', 'published'])}
+            if timestamp_fields:
+                log_and_print(f"Article '{article_title}' timestamp fields: {timestamp_fields}", bot_handle, source_id)
+
+            # Try various timestamp field names that might exist
+            updated_at = (
+                article.get("updated_at") or
+                article.get("modified_at") or
+                article.get("last_updated") or
+                article.get("last_modified") or
+                article.get("last_published_at") or  # This is the key field from Pylon!
+                article.get("published_at") or
+                article.get("date_updated") or
+                article.get("date_modified")
+            )
+
+            # Log articles with missing timestamps to help identify data issues
+            if not updated_at:
+                log_and_print(f"Warning: Article '{article_title}' has no timestamp - using default date", bot_handle, source_id)
+                updated_at = "2020-01-01T00:00:00Z"
+
             processed_articles[article_id] = {
                 "id": article_id,
-                "title": article.get("title") or article.get("name") or "Untitled",
+                "title": article_title,
                 "content": content,
                 "content_hash": get_content_hash(content),
-                "updated_at": (
-                    article.get("updated_at")
-                    or article.get("modified_at")
-                    or datetime.utcnow().isoformat() + "Z"
-                )
+                "updated_at": updated_at
             }
 
     log_and_print(f"Retrieved {len(processed_articles)} articles from Pylon", bot_handle, source_id)
@@ -165,16 +185,28 @@ def perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url
     to_create = pylon_ids - ada_ids
     log_and_print(f"Articles to create: {len(to_create)}", bot_handle, source_id)
 
-    # Articles in both but content differs → UPDATE
+    # Articles in both but timestamps differ → UPDATE
     to_update = []
     for article_id in pylon_ids & ada_ids:
-        pylon_hash = pylon_articles[article_id]["content_hash"]
-        ada_hash = ada_articles[article_id]["content_hash"]
-        if pylon_hash != ada_hash:
+        pylon_timestamp = pylon_articles[article_id]["updated_at"]
+        ada_timestamp = ada_articles[article_id]["updated_at"]
+
+        # Compare timestamps - update if Pylon is newer
+        if pylon_timestamp > ada_timestamp:
             to_update.append(article_id)
-            log_and_print(f"Content changed for '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
-            log_and_print(f"  Pylon hash: {pylon_hash}", bot_handle, source_id)
-            log_and_print(f"  Ada hash: {ada_hash}", bot_handle, source_id)
+            log_and_print(f"Article updated: '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
+            log_and_print(f"  Pylon timestamp: {pylon_timestamp}", bot_handle, source_id)
+            log_and_print(f"  Ada timestamp: {ada_timestamp}", bot_handle, source_id)
+        elif pylon_timestamp == ada_timestamp:
+            log_and_print(f"Article unchanged: '{pylon_articles[article_id]['title']}' - timestamps match", bot_handle, source_id)
+        else:
+            # Fallback to content hash comparison if timestamps are unreliable
+            pylon_hash = pylon_articles[article_id]["content_hash"]
+            ada_hash = ada_articles[article_id]["content_hash"]
+            if pylon_hash != ada_hash:
+                to_update.append(article_id)
+                log_and_print(f"Article updated (fallback hash check): '{pylon_articles[article_id]['title']}' (ID: {article_id})", bot_handle, source_id)
+                log_and_print(f"  Ada timestamp newer but content differs - using hash comparison", bot_handle, source_id)
 
     log_and_print(f"Articles to update: {len(to_update)}", bot_handle, source_id)
 
