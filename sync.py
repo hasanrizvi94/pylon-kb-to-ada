@@ -17,16 +17,16 @@ def get_user_credentials():
     print("Welcome to the Pylon-to-Ada Knowledge Base Sync Tool!")
     print("Please provide the following information:\n")
 
-    # Get bot handle (maps to Ada bot URL)
+    # Get Ada credentials first
     bot_handle = input("Enter your Ada bot handle (e.g., 'my-bot' for my-bot.ada.support): ").strip()
     if not bot_handle:
         raise ValueError("Bot handle is required")
 
-    # Get API keys
     ada_api_key = input("Enter your Ada API key: ").strip()
     if not ada_api_key:
         raise ValueError("Ada API key is required")
 
+    # Then get Pylon credentials
     pylon_api_key = input("Enter your Pylon API key: ").strip()
     if not pylon_api_key:
         raise ValueError("Pylon API key is required")
@@ -53,10 +53,10 @@ def log_and_print(msg, bot_handle=None, source_id=None):
     print(formatted_msg)        # Display message to user in real-time
     logging.info(formatted_msg) # Write message to log file for permanent record
 
-def get_pylon_kb(pylon_api_key, bot_handle=None):
-    # Make authenticated GET request to fetch all knowledge bases
+def get_pylon_kb(kb_id, pylon_api_key, bot_handle=None):
+    # Make authenticated GET request to fetch the specific knowledge base
     res = requests.get(
-        "https://api.usepylon.com/knowledge-bases",
+        f"https://api.usepylon.com/knowledge-bases/{kb_id}",
         headers={
             "Authorization": f"Bearer {pylon_api_key}",  # Bearer token authentication
             "Content-Type": "application/json"           # Specify JSON content type
@@ -66,13 +66,9 @@ def get_pylon_kb(pylon_api_key, bot_handle=None):
     # Raise exception if request failed (4xx or 5xx status codes)
     res.raise_for_status()
 
-    # Extract the data array from JSON response
-    data = res.json()["data"]
-
-    # Get ID and title from the first knowledge base
-    # Note: This assumes at least one knowledge base exists
-    kb_id = data[0]["id"]
-    kb_name = data[0]["title"]
+    # Extract the knowledge base data
+    kb_data = res.json()["data"]
+    kb_name = kb_data["title"]
 
     # Log the found knowledge base for tracking
     log_and_print(f"Found Pylon KB: {kb_name} (ID: {kb_id})", bot_handle)
@@ -220,12 +216,17 @@ if __name__ == "__main__":
         # Step 0: Get user credentials and configuration
         pylon_api_key, ada_api_key, ada_bot_url = get_user_credentials()
 
+        # Get Pylon knowledge base ID
+        kb_id = input("Enter your Pylon knowledge base ID: ").strip()
+        if not kb_id:
+            raise ValueError("Knowledge base ID is required")
+
         # Extract bot handle from URL
         bot_handle = ada_bot_url.replace("https://", "").replace(".ada.support", "")
 
         # Step 1: Get the Pylon knowledge base information
-        # This identifies which knowledge base to sync from
-        kb_id, kb_name = get_pylon_kb(pylon_api_key, bot_handle)
+        # This validates the KB ID and gets the KB name
+        kb_id, kb_name = get_pylon_kb(kb_id, pylon_api_key, bot_handle)
 
         # Step 2: Retrieve all articles from the Pylon knowledge base
         # This fetches the actual content that needs to be synced
