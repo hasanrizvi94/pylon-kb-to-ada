@@ -3,7 +3,6 @@ from markdownify import markdownify as md
 import logging
 from datetime import datetime
 import hashlib
-import time
 from dateutil import parser
 
 # Configure logging
@@ -50,9 +49,7 @@ def get_pylon_articles(kb_id, pylon_api_key, bot_handle=None, source_id=None):
             article_id = article.get("id") or article.get("_id")
             article_title = article.get("title") or article.get("name") or "Untitled"
 
-            # Log timestamp fields only if none found (for debugging missing timestamps)
-            timestamp_fields = {k: v for k, v in article.items() if any(word in k.lower() for word in ['time', 'date', 'updated', 'modified', 'created', 'published'])}
-            # Removed verbose logging - only log if no timestamp fields found
+            # Extract timestamp for comparison
 
             # Try various timestamp field names that might exist
             updated_at = (
@@ -236,23 +233,6 @@ def perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url
 
     log_and_print(f"Delta sync completed: {len(to_create)} created, {len(to_update)} updated, {len(to_delete)} deleted", bot_handle, source_id)
 
-# def continuous_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url, interval_seconds=300):
-#     """Run continuous sync at regular intervals."""
-#     log_and_print(f"Starting continuous sync (interval: {interval_seconds} seconds)")
-
-#     while True:
-#         try:
-#             perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url)
-#             log_and_print(f"Sync completed. Next sync in {interval_seconds} seconds...")
-#             time.sleep(interval_seconds)
-#         except KeyboardInterrupt:
-#             log_and_print("Continuous sync stopped by user")
-#             break
-#         except Exception as e:
-#             logging.error(f"Sync failed: {e}")
-#             log_and_print(f"Error during sync: {e}. Retrying in {interval_seconds} seconds...")
-#             time.sleep(interval_seconds)
-
 def get_user_credentials():
     """Prompt user for their API credentials and bot handle."""
     print("Welcome to the Pylon-to-Ada Update Sync Tool!")
@@ -296,20 +276,8 @@ if __name__ == "__main__":
         # Extract bot handle from URL
         bot_handle = ada_bot_url.replace("https://", "").replace(".ada.support", "")
 
-        # Run single delta sync
+        # Run delta sync
         perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url, bot_handle)
-
-        # # Get sync interval
-        # interval_input = input("Enter sync interval in seconds (default: 300): ").strip()
-        # interval = int(interval_input) if interval_input else 300
-
-        # # Choose sync mode
-        # mode = input("Run once (1) or continuous (2)? Enter 1 or 2: ").strip()
-
-        # if mode == "1":
-        #     perform_delta_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url)
-        # else:
-        #     continuous_sync(kb_id, source_id, pylon_api_key, ada_api_key, ada_bot_url, interval)
 
     except Exception as e:
         logging.error(f"Update sync failed: {e}")
