@@ -99,16 +99,16 @@ def bulk_upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_hand
     if not articles:
         return
 
-    # Format articles for bulk upsert
-    formatted_articles = {}
-    for i, article in enumerate(articles):
-        formatted_articles[str(i)] = {
+    # Format articles for bulk upsert (as array, not object)
+    formatted_articles = []
+    for article in articles:
+        formatted_articles.append({
             "id": article["id"],
             "name": article["title"],
             "content": article["content"],
             "knowledge_source_id": source_id,
             "external_updated": article["updated_at"]
-        }
+        })
 
     res = requests.post(
         f"{ada_bot_url}/api/v2/knowledge/bulk/articles/",
