@@ -210,3 +210,21 @@
 2025-09-18 17:38:38,383 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploaded 5 articles to Ada.
 2025-09-18 17:38:38,387 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Sync completed successfully.
 2025-09-18 17:38:38,388 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
+2025-09-18 17:46:44,485 [INFO] [hasan-gen-test] Found Pylon KB: Secondary Knowledge Base (ID: bc1792d2-32b3-4818-b481-9b8041d56168)
+2025-09-18 17:46:44,847 [INFO] [hasan-gen-test] Retrieved 1 articles.
+2025-09-18 17:46:44,851 [INFO] [hasan-gen-test] Creating Ada knowledge source with: {'id': 'bc1792d2-32b3-4818-b481-9b8041d56168', 'name': 'Pylon (Secondary Knowledge Base)'}
+2025-09-18 17:46:45,525 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] Created Ada knowledge source: bc1792d2-32b3-4818-b481-9b8041d56168
+2025-09-18 17:46:45,531 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] Uploading 1 articles to Ada.
+2025-09-18 17:46:46,260 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] Uploaded 1 articles to Ada.
+2025-09-18 17:46:46,264 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] Sync completed successfully.
+2025-09-18 17:46:46,264 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] To delete this source, run: python delete.py bc1792d2-32b3-4818-b481-9b8041d56168 https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
+2025-09-18 17:47:46,869 [INFO] [hasan-gen-test] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-09-18 17:47:47,231 [INFO] [hasan-gen-test] Retrieved 7 articles.
+2025-09-18 17:47:47,235 [INFO] [hasan-gen-test] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-09-18 17:47:47,847 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-18 17:47:47,851 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'How to Setup Single Sign-On (SSO)' - empty content
+2025-09-18 17:47:47,851 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'Why am I not receiving the password reset email?' - empty content
+2025-09-18 17:47:47,858 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploading 5 articles to Ada.
+2025-09-18 17:47:48,519 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploaded 5 articles to Ada.
+2025-09-18 17:47:48,524 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Sync completed successfully.
+2025-09-18 17:47:48,524 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
