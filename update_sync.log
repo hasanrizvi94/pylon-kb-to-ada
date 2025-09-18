@@ -1,0 +1,23 @@
+2025-09-18 16:15:42,927 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Starting delta sync...
+2025-09-18 16:15:43,411 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Pylon
+2025-09-18 16:15:44,575 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Ada
+2025-09-18 16:15:44,578 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to create: 0
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Content changed for 'How to create an article for Hasan' (ID: d2109c07-289c-484c-91c1-82824d17aa4e)
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Pylon hash: 2fd3918a96bebcd10d4f7a96e5055cc1
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Ada hash: 372ebc726dfdcb6a79dd0b72b9d47d58
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Content changed for 'Adding a New User to Your Account' (ID: f26b21ba-7b63-4e40-89ce-98c40f745e6d)
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Pylon hash: 9463d8c6790aebebbfbe7df72d0f3834
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Ada hash: ba20166770b865174a740f32fa9fde34
+2025-09-18 16:15:44,579 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to update: 2
+2025-09-18 16:15:45,119 [ERROR] Update sync failed: 400 Client Error: Bad Request for url: https://hasan-gen-test.ada.support/api/v2/knowledge/bulk/articles/
+2025-09-18 16:24:51,147 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Starting delta sync...
+2025-09-18 16:24:51,609 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Pylon
+2025-09-18 16:24:52,324 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Ada
+2025-09-18 16:24:52,326 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to create: 0
+2025-09-18 16:24:52,326 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Content changed for 'Adding a New User to Your Account' (ID: f26b21ba-7b63-4e40-89ce-98c40f745e6d)
+2025-09-18 16:24:52,326 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Pylon hash: 9463d8c6790aebebbfbe7df72d0f3834
+2025-09-18 16:24:52,326 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Ada hash: ba20166770b865174a740f32fa9fde34
+2025-09-18 16:24:52,326 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to update: 1
+2025-09-18 16:24:52,970 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Bulk upserted 1 articles: Adding a New User to Your Account
+2025-09-18 16:24:52,974 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 0
+2025-09-18 16:24:52,974 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 0 created, 1 updated, 0 deleted

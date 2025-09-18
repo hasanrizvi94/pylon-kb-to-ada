@@ -100,3 +100,23 @@
 2025-09-18 14:33:09,316 [INFO] Uploaded 5 articles to Ada.
 2025-09-18 14:33:09,318 [INFO] Sync completed successfully.
 2025-09-18 14:33:09,318 [INFO] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
+2025-09-18 16:09:06,106 [INFO] [hasan-gen-test] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-09-18 16:09:06,469 [INFO] [hasan-gen-test] Retrieved 8 articles.
+2025-09-18 16:09:06,473 [INFO] [hasan-gen-test] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-09-18 16:09:07,100 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-18 16:09:07,108 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'How to Setup Single Sign-On (SSO)' - empty content
+2025-09-18 16:09:07,108 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'Why am I not receiving the password reset email?' - empty content
+2025-09-18 16:09:07,116 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploading 6 articles to Ada.
+2025-09-18 16:09:07,819 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploaded 6 articles to Ada.
+2025-09-18 16:09:07,823 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Sync completed successfully.
+2025-09-18 16:09:07,823 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
+2025-09-18 16:23:26,787 [INFO] [hasan-gen-test] Found Pylon KB: Ada  Knowledge Base (ID: 329a1051-e4f7-42fa-9b1b-697bf03739ca)
+2025-09-18 16:23:27,160 [INFO] [hasan-gen-test] Retrieved 8 articles.
+2025-09-18 16:23:27,165 [INFO] [hasan-gen-test] Creating Ada knowledge source with: {'id': '329a1051-e4f7-42fa-9b1b-697bf03739ca', 'name': 'Pylon (Ada  Knowledge Base)'}
+2025-09-18 16:23:27,815 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Created Ada knowledge source: 329a1051-e4f7-42fa-9b1b-697bf03739ca
+2025-09-18 16:23:27,822 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'How to Setup Single Sign-On (SSO)' - empty content
+2025-09-18 16:23:27,822 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Skipping article 'Why am I not receiving the password reset email?' - empty content
+2025-09-18 16:23:27,829 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploading 6 articles to Ada.
+2025-09-18 16:23:29,013 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Uploaded 6 articles to Ada.
+2025-09-18 16:23:29,014 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Sync completed successfully.
+2025-09-18 16:23:29,014 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] To delete this source, run: python delete.py 329a1051-e4f7-42fa-9b1b-697bf03739ca https://hasan-gen-test.ada.support 541c89f8a25e9e97dbc74f291e38573e
