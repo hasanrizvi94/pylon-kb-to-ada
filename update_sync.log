@@ -154,3 +154,16 @@
 2025-09-18 17:18:01,396 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Bulk upserted 1 articles: How to create an article for Hasan
 2025-09-18 17:18:01,400 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 0
 2025-09-18 17:18:01,400 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 1 created, 0 updated, 0 deleted
+2025-09-18 17:30:20,449 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Starting delta sync...
+2025-09-18 17:30:20,933 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 5 articles from Pylon
+2025-09-18 17:30:22,058 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Ada
+2025-09-18 17:30:22,062 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to create: 0
+2025-09-18 17:30:22,063 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Adding a New User to Your Account' - timestamps match
+2025-09-18 17:30:22,064 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Resetting Your Password' - timestamps match
+2025-09-18 17:30:22,064 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'How to Submit a Feature Request' - timestamps match
+2025-09-18 17:30:22,064 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Troubleshooting Slow Page Load Times' - timestamps match
+2025-09-18 17:30:22,064 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'How do I report a bug to Ada Support?' - timestamps match
+2025-09-18 17:30:22,065 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to update: 0
+2025-09-18 17:30:22,065 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 1
+2025-09-18 17:30:22,636 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Deleted 1 articles: 91e42d02-e38d-4058-864f-e2b80ba7f7fc
+2025-09-18 17:30:22,639 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 0 created, 0 updated, 1 deleted
