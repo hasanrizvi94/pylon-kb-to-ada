@@ -158,10 +158,9 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_handle=No
         # Different Pylon sources may use different timestamp field names
         article_title = article.get("title") or article.get("name") or "Untitled"
 
-        # Log all available timestamp fields for debugging
+        # Log timestamp fields only if none found (for debugging missing timestamps)
         timestamp_fields = {k: v for k, v in article.items() if any(word in k.lower() for word in ['time', 'date', 'updated', 'modified', 'created', 'published'])}
-        if timestamp_fields:
-            log_and_print(f"Article '{article_title}' timestamp fields: {timestamp_fields}", bot_handle, source_id)
+        # Removed verbose logging - only log if no timestamp fields found
 
         # Try various timestamp field names that might exist
         updated_at = (
