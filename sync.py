@@ -23,21 +23,21 @@ def get_user_credentials():
         raise ValueError("Bot handle is required")
 
     # Get API keys
-    pylon_api_key = input("Enter your Pylon API key: ").strip()
-    if not pylon_api_key:
-        raise ValueError("Pylon API key is required")
-
     ada_api_key = input("Enter your Ada API key: ").strip()
     if not ada_api_key:
         raise ValueError("Ada API key is required")
+
+    pylon_api_key = input("Enter your Pylon API key: ").strip()
+    if not pylon_api_key:
+        raise ValueError("Pylon API key is required")
 
     # Construct Ada bot URL
     ada_bot_url = f"https://{bot_handle}.ada.support"
 
     print(f"\nConfiguration:")
     print(f"Ada Bot URL: {ada_bot_url}")
-    print(f"Pylon API Key: {pylon_api_key[:10]}...")
-    print(f"Ada API Key: {ada_api_key[:10]}...\n")
+    print(f"Ada API Key: {ada_api_key[:10]}...")
+    print(f"Pylon API Key: {pylon_api_key[:10]}...\n")
 
     return pylon_api_key, ada_api_key, ada_bot_url
 
