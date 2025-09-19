@@ -179,7 +179,8 @@ def upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_handle=No
             "name": article.get("title") or article.get("name") or "Untitled",  # Article title with fallback
             "content": content,  # Converted Markdown content
             "knowledge_source_id": source_id,  # Link to the Ada knowledge source
-            "external_updated": updated_at  # Last modification timestamp
+            "external_updated": updated_at,  # Last modification timestamp
+            "url": article.get("url", "")  # Map Pylon article URL to Ada
         })
 
     # Check if we have any articles to upload

@@ -73,7 +73,8 @@ def get_pylon_articles(kb_id, pylon_api_key, bot_handle=None, source_id=None):
                 "title": article_title,
                 "content": content,
                 "content_hash": get_content_hash(content),
-                "updated_at": updated_at
+                "updated_at": updated_at,
+                "url": article.get("url", "")
             }
 
     log_and_print(f"Retrieved {len(processed_articles)} articles from Pylon", bot_handle, source_id)
@@ -124,7 +125,8 @@ def bulk_upsert_articles(articles, source_id, ada_api_key, ada_bot_url, bot_hand
             "name": article["title"],
             "content": article["content"],
             "knowledge_source_id": source_id,
-            "external_updated": article["updated_at"]
+            "external_updated": article["updated_at"],
+            "url": article.get("url", "")
         })
 
     res = requests.post(
