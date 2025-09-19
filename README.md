@@ -4,15 +4,14 @@ A Python tool to synchronize knowledge base articles from Pylon to Ada Support's
 
 ## Overview
 
-This tool provides a comprehensive solution for migrating and maintaining knowledge base content from Pylon to Ada Support. It includes both initial sync capabilities and intelligent delta synchronization to keep your knowledge bases up-to-date.
+This tool provides a comprehensive solution for migrating and maintaining knowledge base content from Pylon to Ada Support. It includes both initial sync capabilities and delta synchronization to keep your knowledge bases in Ada up-to-date.
 
 ## Features
 
 - **Universal Compatibility**: Works with any Ada bot and Pylon account through interactive prompts
 - **Secure Credential Handling**: Prompts for API keys and bot handles at runtime (no hardcoded credentials)
 - **Initial Sync**: Fetches all articles from a Pylon knowledge base and uploads them to Ada
-- **Delta Sync**: Intelligent synchronization that only updates changed articles
-- **Timestamp-Based Sync**: Uses `last_published_at` timestamps for accurate change detection
+- **Delta Sync**: Intelligent synchronization that only updates changed, deleted or newly created articles
 - **Content Conversion**: Automatically converts HTML content to Markdown format
 - **Smart Filtering**: Skips articles with empty content to ensure Ada API compliance
 - **Comprehensive Logging**: Detailed logging for both sync operations and troubleshooting
@@ -44,8 +43,9 @@ Required packages:
 
 **No configuration needed!** The scripts will prompt you for:
 - Your Ada bot handle (e.g., "my-bot" for my-bot.ada.support)
-- Your Pylon API key
 - Your Ada API key
+- Your Pylon API key
+- Your Pylon Knowledge Base ID
 
 ## Usage
 
@@ -128,9 +128,8 @@ Replace the placeholders with your actual values. The sync scripts provide the e
 
 Both scripts now support multiple knowledge bases within the same Pylon account:
 
-- **Automatic KB selection**: Enter the specific KB ID you want to sync
+- **Automatic KB selection**: Enter the specific KB ID you want to sync (see the url in Pylon)
 - **Multi-KB workflows**: Sync different Pylon KBs to separate Ada knowledge sources
-- **Enterprise ready**: Perfect for organizations with multiple product lines or teams
 
 ### Timestamp-Based Synchronization
 
@@ -213,18 +212,6 @@ Delta sync completed: 0 created, 0 updated, 0 deleted
 3. **Test with small batches** before full migration
 4. **Keep source IDs** from `source_ids.txt` for cleanup
 
-## Notes
-
-- **Universal compatibility**: Works with any Ada bot subdomain and Pylon account
-- **Multiple KB support**: Sync any specific knowledge base by entering its ID
-- **Consistent user experience**: Both scripts follow the same prompt sequence (Ada → Pylon)
-- **Automatic URL construction**: Bot handle automatically constructs the full Ada API URL
-- **Smart content filtering**: Skips articles with empty content to prevent API errors
-- **Efficient sync**: Delta sync only processes changed articles
-- **Timezone aware**: Handles different timestamp formats between Pylon and Ada
-- **Clean codebase**: Removed all redundant/commented code for better maintainability
-- Processes up to 200 articles per sync (Pylon API limit)
-- Maintains article IDs and timestamps for accurate synchronization tracking
 
 ## Example Multi-KB Usage
 
