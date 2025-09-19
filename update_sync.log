@@ -238,3 +238,5 @@
 2025-09-19 14:06:08,384 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Bulk upserted 2 articles: This is test article for Hasan, How to Submit a Feature Request
 2025-09-19 14:06:08,388 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 0
 2025-09-19 14:06:08,389 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 1 created, 1 updated, 0 deleted
+2025-09-19 14:09:22,181 [INFO] [hasan-gen-test:bc1792d2-32b3-4818-b481-9b8041d56168] Starting delta sync...
+2025-09-19 14:09:22,603 [ERROR] Update sync failed: 'NoneType' object is not iterable
