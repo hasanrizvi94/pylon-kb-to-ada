@@ -223,3 +223,18 @@
 2025-09-19 13:54:26,595 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Bulk upserted 1 articles: How to Submit a Feature Request
 2025-09-19 13:54:26,600 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 0
 2025-09-19 13:54:26,600 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 0 created, 1 updated, 0 deleted
+2025-09-19 14:06:06,072 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Starting delta sync...
+2025-09-19 14:06:06,520 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 6 articles from Pylon
+2025-09-19 14:06:07,314 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Retrieved 5 articles from Ada
+2025-09-19 14:06:07,318 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to create: 1
+2025-09-19 14:06:07,322 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Resetting Your Password' - timestamps match
+2025-09-19 14:06:07,323 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Troubleshooting Slow Page Load Times' - timestamps match
+2025-09-19 14:06:07,323 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'Adding a New User to Your Account' - timestamps match
+2025-09-19 14:06:07,323 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article updated: 'How to Submit a Feature Request' (ID: 54f9dbd2-f3be-4347-b121-ed60807a99c9)
+2025-09-19 14:06:07,323 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Pylon timestamp: 2025-09-19T18:04:59Z
+2025-09-19 14:06:07,323 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca]   Ada timestamp: 2025-09-19T17:53:35+00:00
+2025-09-19 14:06:07,324 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Article unchanged: 'How do I report a bug to Ada Support?' - timestamps match
+2025-09-19 14:06:07,324 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to update: 1
+2025-09-19 14:06:08,384 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Bulk upserted 2 articles: This is test article for Hasan, How to Submit a Feature Request
+2025-09-19 14:06:08,388 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Articles to delete: 0
+2025-09-19 14:06:08,389 [INFO] [hasan-gen-test:329a1051-e4f7-42fa-9b1b-697bf03739ca] Delta sync completed: 1 created, 1 updated, 0 deleted
