@@ -11,10 +11,10 @@ This tool provides a comprehensive solution for migrating and maintaining knowle
 - **Universal Compatibility**: Works with any Ada bot and Pylon account through interactive prompts
 - **Secure Credential Handling**: Prompts for API keys and bot handles at runtime (no hardcoded credentials)
 - **Initial Sync**: Fetches all articles from a Pylon knowledge base and uploads them to Ada
-- **Delta Sync**: Intelligent synchronization that only updates changed, deleted or newly created articles
-- **Content Conversion**: Automatically converts HTML content to Markdown format
+- **Delta Sync**: When updating the sync only updates changed, deleted or newly created articles
+- **Content Conversion**: Converts HTML content to Markdown format
 - **Smart Filtering**: Skips articles with empty content to ensure Ada API compliance
-- **Comprehensive Logging**: Detailed logging for both sync operations and troubleshooting
+- **Sync Logging**: Detailed logging for both sync operations and troubleshooting
 - **Source Tracking**: Maintains a record of created knowledge sources in `source_ids.txt`
 - **Cleanup Utility**: Includes a deletion script to remove synchronized sources
 
@@ -133,12 +133,7 @@ Both scripts now support multiple knowledge bases within the same Pylon account:
 
 ### Timestamp-Based Synchronization
 
-The delta sync uses Pylon's `last_published_at` field to determine when articles were last modified:
-
-- **Pylon format**: `2025-07-11T19:20:22Z`
-- **Ada format**: `2025-07-11T19:20:22+00:00`
-- **Smart comparison**: Handles timezone format differences automatically
-- **Accurate detection**: Only articles with newer Pylon timestamps are updated
+The delta sync uses Pylon's `last_published_at` field to determine when articles were last modified.
 
 ### Content Hash Fallback
 
