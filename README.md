@@ -14,8 +14,8 @@ This tool provides a comprehensive solution for migrating and maintaining knowle
 - **Delta Sync**: When updating the sync only updates changed, deleted or newly created articles
 - **Content Conversion**: Converts HTML content to Markdown format
 - **Smart Filtering**: Skips articles with empty content to ensure Ada API compliance
-- **Sync Logging**: Detailed logging for both sync operations and troubleshooting
-- **Source Tracking**: Maintains a record of created knowledge sources in `source_ids.txt`
+- **Sync Logging**: Detailed logging for both sync operations and troubleshooting (generated locally, not committed)
+- **Source Tracking**: Maintains a local record of created knowledge sources in `source_ids.txt`
 - **Cleanup Utility**: Includes a deletion script to remove synchronized sources
 
 ## Files
@@ -23,6 +23,9 @@ This tool provides a comprehensive solution for migrating and maintaining knowle
 - `sync.py` - Initial synchronization script (creates new knowledge source)
 - `update_sync.py` - Delta synchronization script (updates existing knowledge source)
 - `delete.py` - Utility to delete Ada knowledge sources
+- `.gitignore` - Prevents logs, cache, and sync state from being committed
+
+The following files are generated locally at runtime and excluded from version control:
 - `source_ids.txt` - Log of created source IDs with timestamps
 - `sync.log` - Detailed operation logs for initial sync
 - `update_sync.log` - Detailed operation logs for delta sync
@@ -188,8 +191,8 @@ Delta sync completed: 0 created, 0 updated, 0 deleted
 ## Security
 
 - **No hardcoded credentials**: All API keys and bot URLs are entered at runtime
+- **`.gitignore` configured**: Logs, `__pycache__/`, `source_ids.txt`, and `.env` are excluded from version control
 - **Git history cleaned**: No sensitive information stored in repository history
-- **Safe for public repositories**: Anyone can use this tool with their own credentials
 
 ## Troubleshooting
 
