@@ -1,0 +1,13 @@
+# Logs
+sync.log
+update_sync.log
+
+# Runtime artifacts
+__pycache__/
+*.pyc
+
+# Sync state
+source_ids.txt
+
+# Environment
+.env
